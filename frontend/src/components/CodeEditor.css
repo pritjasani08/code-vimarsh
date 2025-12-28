@@ -1,0 +1,237 @@
+.code-editor-container {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.code-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.code-editor-header h2 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.code-editor-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.language-select {
+  padding: 8px 16px;
+  background: #2d2d2d;
+  color: #ffffff;
+  border: 1px solid #3d3d3d;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.language-select:hover {
+  background: #3d3d3d;
+  border-color: #4d4d4d;
+}
+
+.language-select:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+.btn-reset {
+  padding: 8px 16px;
+  background: #3d3d3d;
+  color: #ffffff;
+  border: 1px solid #4d4d4d;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-reset:hover {
+  background: #4d4d4d;
+  border-color: #5d5d5d;
+}
+
+.code-editor-textarea {
+  width: 100%;
+  min-height: 300px;
+  background: #252526;
+  color: #d4d4d4;
+  border: 1px solid #3d3d3d;
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.code-editor-textarea:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+.code-editor-textarea::placeholder {
+  color: #6a6a6a;
+}
+
+.btn-run {
+  width: 100%;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.btn-run:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-run:active {
+  transform: translateY(0);
+}
+
+.btn-run:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loading-indicator {
+  background: #2d2d2d;
+  color: #d4d4d4;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  border: 1px solid #3d3d3d;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.code-output {
+  background: #252526;
+  border: 1px solid #3d3d3d;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.code-output h3 {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.code-output pre {
+  color: #d4d4d4;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+/* Stdin Input Section */
+.stdin-section {
+  margin-bottom: 1rem;
+}
+
+.stdin-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: #d4d4d4;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.stdin-label span {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.stdin-label small {
+  color: #9a9a9a;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.stdin-input {
+  width: 100%;
+  background: #252526;
+  color: #d4d4d4;
+  border: 1px solid #3d3d3d;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.stdin-input:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+.stdin-input::placeholder {
+  color: #6a6a6a;
+}
+
+@media (max-width: 768px) {
+  .code-editor-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .code-editor-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .code-editor-textarea {
+    min-height: 250px;
+    font-size: 12px;
+  }
+
+  .stdin-input {
+    font-size: 12px;
+  }
+}
+

@@ -1,0 +1,110 @@
+.announcements {
+  min-height: calc(100vh - 70px);
+  background: transparent;
+  position: relative;
+}
+
+.announcements::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  background-attachment: fixed;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.announcements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.announcement-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.announcement-card:hover {
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.announcement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.announcement-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+  min-width: 200px;
+}
+
+.announcement-date {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.announcement-type {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(99, 102, 241, 0.2);
+  color: #a78bfa;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.announcement-content {
+  color: #cbd5e1;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.no-announcements {
+  text-align: center;
+  padding: 3rem;
+  color: #94a3b8;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .announcement-header {
+    flex-direction: column;
+  }
+
+  .announcement-title {
+    font-size: 1.25rem;
+  }
+
+  .announcement-card {
+    padding: 1.5rem;
+  }
+}
+
