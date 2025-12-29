@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './Gallery.css';
 
@@ -10,25 +10,16 @@ const Gallery = () => {
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-  useEffect(() => {
-    fetchEvents();
-    fetchImages();
-  }, []);
-
-  useEffect(() => {
-    fetchImages(selectedEvent);
-  }, [selectedEvent]);
-
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       const res = await axios.get(`${API_URL}/upload/gallery/events`);
       setEvents(res.data);
     } catch (error) {
       console.error('Error fetching events:', error);
     }
-  };
+  }, [API_URL]);
 
-  const fetchImages = async (eventName = '') => {
+  const fetchImages = useCallback(async (eventName = '') => {
     try {
       setLoading(true);
       let url = `${API_URL}/upload/gallery`;
@@ -44,7 +35,7 @@ const Gallery = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL]);
 
   const getImageUrl = (imagePath) => {
     if (imagePath.startsWith('http')) {

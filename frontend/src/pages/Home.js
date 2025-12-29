@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import CodeEditor from '../components/CodeEditor';
 import CodingPractice from '../components/CodingPractice';
@@ -12,12 +12,7 @@ const Home = () => {
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-  useEffect(() => {
-    fetchTechNews();
-    fetchConcept();
-  }, []);
-
-  const fetchTechNews = async () => {
+  const fetchTechNews = useCallback(async () => {
     try {
       // Fetch only tech_news type announcements from backend
       const response = await axios.get(`${API_URL}/announcements?type=tech_news`);
@@ -27,9 +22,9 @@ const Home = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL]);
 
-  const fetchConcept = async () => {
+  const fetchConcept = useCallback(async () => {
     try {
       const response = await axios.get(`${API_URL}/concept`);
       if (response.data && response.data !== null) {
@@ -43,7 +38,12 @@ const Home = () => {
     } finally {
       setConceptLoading(false);
     }
-  };
+  }, [API_URL]);
+
+  useEffect(() => {
+    fetchTechNews();
+    fetchConcept();
+  }, [fetchTechNews, fetchConcept]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

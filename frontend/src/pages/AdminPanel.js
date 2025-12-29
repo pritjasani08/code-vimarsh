@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
@@ -8,7 +8,6 @@ const AdminPanel = () => {
   const { user, isAdmin } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('announcements');
-  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
@@ -134,11 +133,7 @@ const AnnouncementsManager = ({ API_URL, showMessage }) => {
   const [formData, setFormData] = useState({ title: '', content: '', type: 'notice' });
   const [editingId, setEditingId] = useState(null);
 
-  useEffect(() => {
-    fetchAnnouncements();
-  }, []);
-
-  const fetchAnnouncements = async () => {
+  const fetchAnnouncements = useCallback(async () => {
     try {
       const res = await axios.get(`${API_URL}/announcements`);
       setAnnouncements(res.data);
@@ -147,7 +142,7 @@ const AnnouncementsManager = ({ API_URL, showMessage }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL, showMessage]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -246,11 +241,7 @@ const TeamManager = ({ API_URL, showMessage }) => {
   const [photoFile, setPhotoFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  useEffect(() => {
-    fetchMembers();
-  }, []);
-
-  const fetchMembers = async () => {
+  const fetchMembers = useCallback(async () => {
     try {
       const res = await axios.get(`${API_URL}/team`);
       setMembers(res.data);
@@ -259,7 +250,11 @@ const TeamManager = ({ API_URL, showMessage }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL, showMessage]);
+
+  useEffect(() => {
+    fetchMembers();
+  }, [fetchMembers]);
 
   const handlePhotoChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -443,11 +438,7 @@ const EventsManager = ({ API_URL, showMessage }) => {
   const [formData, setFormData] = useState({ name: '', description: '', registrationLink: '', eventDate: '' });
   const [editingId, setEditingId] = useState(null);
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
-
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       const res = await axios.get(`${API_URL}/events`);
       setEvents(res.data);
@@ -456,7 +447,11 @@ const EventsManager = ({ API_URL, showMessage }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL, showMessage]);
+
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -568,11 +563,7 @@ const TechNewsManager = ({ API_URL, showMessage }) => {
   const [formData, setFormData] = useState({ title: '', content: '', type: 'tech_news' });
   const [editingId, setEditingId] = useState(null);
 
-  useEffect(() => {
-    fetchNews();
-  }, []);
-
-  const fetchNews = async () => {
+  const fetchNews = useCallback(async () => {
     try {
       const res = await axios.get(`${API_URL}/announcements`);
       const techNews = res.data.filter(item => item.type === 'tech_news');
@@ -582,7 +573,11 @@ const TechNewsManager = ({ API_URL, showMessage }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL, showMessage]);
+
+  useEffect(() => {
+    fetchNews();
+  }, [fetchNews]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -673,29 +668,16 @@ const GalleryManager = ({ API_URL, showMessage }) => {
   const [uploading, setUploading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
-  useEffect(() => {
-    fetchEvents();
-    fetchImages();
-  }, []);
-
-  useEffect(() => {
-    if (selectedEvent) {
-      fetchImages(selectedEvent);
-    } else {
-      fetchImages();
-    }
-  }, [selectedEvent]);
-
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       const res = await axios.get(`${API_URL}/upload/gallery/events`);
       setEvents(res.data);
     } catch (error) {
       console.error('Error fetching events:', error);
     }
-  };
+  }, [API_URL]);
 
-  const fetchImages = async (eventNameFilter = '') => {
+  const fetchImages = useCallback(async (eventNameFilter = '') => {
     try {
       setLoading(true);
       let url = `${API_URL}/upload/gallery`;
@@ -709,7 +691,7 @@ const GalleryManager = ({ API_URL, showMessage }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL, showMessage]);
 
   const handleFileSelect = (e) => {
     if (e.target.files) {
@@ -861,11 +843,7 @@ const ResourcesManager = ({ API_URL, showMessage }) => {
   const [formData, setFormData] = useState({ mainTopic: '', subtopic: '', link: '', displayOrder: 0 });
   const [editingId, setEditingId] = useState(null);
 
-  useEffect(() => {
-    fetchResources();
-  }, []);
-
-  const fetchResources = async () => {
+  const fetchResources = useCallback(async () => {
     try {
       const res = await axios.get(`${API_URL}/resources/list`);
       setResources(res.data);
@@ -874,7 +852,11 @@ const ResourcesManager = ({ API_URL, showMessage }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL, showMessage]);
+
+  useEffect(() => {
+    fetchResources();
+  }, [fetchResources]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -1011,11 +993,7 @@ const ConceptManager = ({ API_URL, showMessage }) => {
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({ question: '', answer: '' });
 
-  useEffect(() => {
-    fetchConcept();
-  }, []);
-
-  const fetchConcept = async () => {
+  const fetchConcept = useCallback(async () => {
     try {
       const res = await axios.get(`${API_URL}/concept`);
       if (res.data) {
@@ -1030,7 +1008,11 @@ const ConceptManager = ({ API_URL, showMessage }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL, showMessage]);
+
+  useEffect(() => {
+    fetchConcept();
+  }, [fetchConcept]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

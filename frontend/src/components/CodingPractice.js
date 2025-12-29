@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, useCallback } from 'react';
+
 import axios from 'axios';
 import './CodingPractice.css';
 
@@ -10,16 +12,11 @@ const CodingPractice = () => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [questionSource, setQuestionSource] = useState('');
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
   // Fetch questions from API
-  useEffect(() => {
-    fetchQuestions();
-  }, []);
-
-  const fetchQuestions = async () => {
+  const fetchQuestions = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -35,7 +32,6 @@ const CodingPractice = () => {
 
       if (response.data.questions && response.data.questions.length > 0) {
         setQuestions(response.data.questions);
-        setQuestionSource(response.data.source || 'api');
         setCurrentQuestion(0);
         setSelectedAnswer(null);
         setShowResult(false);
@@ -51,7 +47,6 @@ const CodingPractice = () => {
       // Try to extract questions from error response if available
       if (err.response?.data?.questions && err.response.data.questions.length > 0) {
         setQuestions(err.response.data.questions);
-        setQuestionSource(err.response.data.source || 'fallback');
       } else {
         // Use default questions as immediate fallback
         loadDefaultQuestions();
@@ -59,7 +54,11 @@ const CodingPractice = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL]);
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [fetchQuestions]);
 
   const loadDefaultQuestions = () => {
     const defaultQuestions = [
@@ -83,7 +82,6 @@ const CodingPractice = () => {
       }
     ];
     setQuestions(defaultQuestions);
-    setQuestionSource('default');
   };
 
   const handleSkip = () => {

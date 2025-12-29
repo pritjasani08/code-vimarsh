@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './Events.css';
 
@@ -9,11 +9,7 @@ const Events = () => {
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-  useEffect(() => {
-    fetchEvents();
-  }, [filter]);
-
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     try {
       setLoading(true);
       let url = `${API_URL}/events`;
@@ -27,7 +23,11 @@ const Events = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL, filter]);
+
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

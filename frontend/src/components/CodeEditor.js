@@ -41,50 +41,9 @@ console.log("Product:", 5 * 6);`);
   }, []);
 
   const executeJavaScript = (codeString) => {
-    const logs = [];
-    
-    const safeEval = (code) => {
-      const originalLog = console.log;
-      const originalError = console.error;
-      const originalWarn = console.warn;
-      
-      console.log = (...args) => {
-        logs.push(args.map(arg => {
-          if (arg === null) return 'null';
-          if (arg === undefined) return 'undefined';
-          if (typeof arg === 'object') {
-            try {
-              return JSON.stringify(arg, null, 2);
-            } catch (e) {
-              return String(arg);
-            }
-          }
-          return String(arg);
-        }).join(' '));
-      };
-      
-      console.error = (...args) => {
-        logs.push('ERROR: ' + args.map(String).join(' '));
-      };
-      
-      console.warn = (...args) => {
-        logs.push('WARNING: ' + args.map(String).join(' '));
-      };
-
-      try {
-        const func = new Function(code);
-        func();
-      } catch (error) {
-        logs.push('Error: ' + error.message);
-      } finally {
-        console.log = originalLog;
-        console.error = originalError;
-        console.warn = originalWarn;
-      }
-    };
-
-    safeEval(codeString);
-    return logs.length > 0 ? logs.join('\n') : 'Code executed successfully! (No output)';
+    // Code execution is disabled in production for security reasons
+    setOutput("Code execution is disabled in production for security reasons.");
+    return 'Code execution is disabled in production for security reasons.';
   };
 
   const executePython = async (codeString) => {
