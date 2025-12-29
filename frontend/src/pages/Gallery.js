@@ -37,6 +37,19 @@ const Gallery = () => {
     }
   }, [API_URL]);
 
+  useEffect(() => {
+    fetchEvents();
+    fetchImages();
+  }, [fetchEvents, fetchImages]);
+
+  useEffect(() => {
+    if (selectedEvent) {
+      fetchImages(selectedEvent);
+    } else {
+      fetchImages();
+    }
+  }, [selectedEvent, fetchImages]);
+
   const getImageUrl = (imagePath) => {
     if (imagePath.startsWith('http')) {
       return imagePath;

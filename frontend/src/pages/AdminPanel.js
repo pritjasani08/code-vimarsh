@@ -1077,11 +1077,7 @@ const UsersManager = ({ API_URL, showMessage }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       const res = await axios.get(`${API_URL}/admin/users`);
       setUsers(res.data);
@@ -1090,7 +1086,11 @@ const UsersManager = ({ API_URL, showMessage }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL, showMessage]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   const handleMakeAdmin = async (userId) => {
     if (!window.confirm('Are you sure you want to make this user an admin?')) return;
