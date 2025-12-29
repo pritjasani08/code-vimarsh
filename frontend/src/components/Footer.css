@@ -60,7 +60,6 @@
 
 .footer-section ul li a:hover {
   color: #ffffff;
-  transform: translateX(5px);
 }
 
 .footer-section ul li a:hover::after {
@@ -89,7 +88,6 @@
 .social-links a:hover {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  transform: translateY(-5px) scale(1.1);
   box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 

@@ -26,35 +26,7 @@
 }
 
 .auth-page::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: float 20s infinite linear;
-  pointer-events: none;
-  z-index: -1;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-@keyframes float {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50px, -50px) rotate(360deg);
-  }
+  display: none;
 }
 
 .auth-container {
@@ -68,18 +40,6 @@
   max-width: 500px;
   position: relative;
   z-index: 1;
-  animation: slideUp 0.5s ease;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .auth-title {
@@ -136,7 +96,6 @@
   border-color: #6366f1;
   background: rgba(30, 41, 59, 0.7);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-  transform: translateY(-1px);
 }
 
 .form-input.input-error {
@@ -176,13 +135,6 @@
   border-radius: 10px;
   margin-bottom: 1.5rem;
   border-left: 4px solid #ef4444;
-  animation: shake 0.5s ease;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  75% { transform: translateX(10px); }
 }
 
 .btn-primary {
@@ -217,18 +169,12 @@
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(99, 102, 241, 0.6);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
 }
 
 .btn-primary:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  transform: none;
 }
 
 .btn-block {

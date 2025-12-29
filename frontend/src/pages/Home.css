@@ -103,12 +103,11 @@
   border-radius: 12px;
   padding: 2rem;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
   border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
 .benefit-card:hover {
-  transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
   border-color: rgba(99, 102, 241, 0.5);
 }
@@ -178,11 +177,10 @@
   border-radius: 8px;
   padding: 1.5rem;
   border: 1px solid rgba(99, 102, 241, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
 }
 
 .concept-card:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
   border-color: rgba(99, 102, 241, 0.4);
 }
@@ -279,12 +277,11 @@
   border-radius: 8px;
   padding: 1.5rem;
   border: 1px solid rgba(99, 102, 241, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
   margin-bottom: 0.5rem;
 }
 
 .news-card:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
   border-color: rgba(99, 102, 241, 0.4);
 }

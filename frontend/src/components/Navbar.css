@@ -27,11 +27,6 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  transition: transform 0.3s ease;
-}
-
-.navbar-logo:hover {
-  transform: scale(1.05);
 }
 
 .logo-text {
@@ -102,7 +97,6 @@
 }
 
 .nav-signup:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.6);
 }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import TechBackground from './components/TechBackground';
 import Home from './pages/Home';
 import Resources from './pages/Resources';
 import Gallery from './pages/Gallery';
@@ -22,7 +21,6 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
-          <TechBackground />
           <Navbar />
           <main className="main-content">
             <Routes>

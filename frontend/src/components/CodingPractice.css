@@ -69,7 +69,6 @@
 .btn-refresh:hover {
   background: rgba(99, 102, 241, 0.3);
   border-color: rgba(99, 102, 241, 0.5);
-  transform: rotate(180deg);
 }
 
 .btn-retry {
@@ -86,7 +85,6 @@
 }
 
 .btn-retry:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.6);
 }
 
@@ -223,7 +221,6 @@
 .option-item:hover {
   border-color: #6366f1;
   background: rgba(99, 102, 241, 0.1);
-  transform: translateX(5px);
 }
 
 .option-item.selected {
@@ -287,7 +284,6 @@
   padding: 1rem;
   border-radius: 8px;
   border-left: 4px solid;
-  animation: slideIn 0.3s ease;
 }
 
 .explanation.correct-explanation {
@@ -332,7 +328,6 @@
 }
 
 .btn-submit:hover:not(:disabled) {
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.6);
 }
 
@@ -341,16 +336,6 @@
   cursor: not-allowed;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 @media (max-width: 768px) {
   .practice-header {
